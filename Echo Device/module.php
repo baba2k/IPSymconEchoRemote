@@ -721,7 +721,7 @@ class EchoRemote extends IPSModule
      *
      * @param string $tts
      *
-     * @return array|string
+     * @return bool
      */
     public function TextToSpeech(string $tts): bool
     {
@@ -736,14 +736,23 @@ class EchoRemote extends IPSModule
     {
         return $this->PlaySequenceCmd('Alexa.TextCommand', $command);
     }
+	
+    /** Announcement sends an announcement to all alexa devices
+     * @param string $tts
+     * @return bool
+     */
+    public function Announcement(string $tts): bool
+    {
+        return $this->PlaySequenceCmd('Alexa.TextCommand',  'Kündige an, das ' . $tts);
+    }
 
-    /** Announcement
+    /** TextToSpeechDND sends a message to this alexa device if DND is not activated
      *
      * @param string $tts
      *
-     * @return array|string
+     * @return bool
      */
-    public function Announcement(string $tts): bool
+    public function TextToSpeechDND(string $tts): bool
     {
         return $this->PlaySequenceCmd('AlexaAnnouncement', '<speak>' . $tts . '</speak>');
     }
